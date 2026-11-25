@@ -1,1 +1,1 @@
-{"$schema":"https://openapi.vercel.sh/vercel.json","rewrites":[{"destination":"/api/verify.js","source":"/api/verify"}]}
+{"$schema":"https://openapi.vercel.sh/vercel.json","functions":{"api/verify.js":{"maxDuration":60}},"rewrites":[{"destination":"/api/verify.js","source":"/api/verify"}]}
