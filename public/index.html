@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GrindGuard: AI verdicts for airdrop programs</title>
+<meta name="description" content="Paste a program URL. GrindGuard runs ten live checks and returns a GRIND, CAUTION, or SKIP verdict with evidence.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="page">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-name">GrindGuard</span>
+      <span class="brand-tag">SLAY HACKS 2026</span>
+    </div>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch color theme">Dark mode</button>
+  </header>
+
+  <section class="hero">
+    <h1>Check a grind before you spend a day on it.</h1>
+    <p>Paste the program URL. GrindGuard runs ten live checks against the site, the chain, and public records, then returns a verdict with the evidence behind it. Every check runs live. Nothing here is simulated.</p>
+  </section>
+
+  <div class="grid">
+    <section class="card span-7" aria-label="Verify a program">
+      <h2>Verify a program</h2>
+      <p>One URL is enough. Add a contract address when the program publishes one, and pick the chain it runs on.</p>
+      <form id="verifyForm">
+        <label for="urlInput">Program URL</label>
+        <input type="url" id="urlInput" name="url" placeholder="https://example.com" required autocomplete="off">
+        <div class="row">
+          <div>
+            <label for="contractInput">Contract address (optional)</label>
+            <input type="text" id="contractInput" name="contractAddress" placeholder="0x..." autocomplete="off" inputmode="text">
+          </div>
+          <div>
+            <label for="chainSelect">Chain</label>
+            <select id="chainSelect" name="chain">
+              <option value="ethereum">Ethereum</option>
+              <option value="bsc" selected>BNB Smart Chain</option>
+              <option value="polygon">Polygon</option>
+              <option value="base">Base</option>
+              <option value="arbitrum">Arbitrum</option>
+            </select>
+          </div>
+        </div>
+        <p class="hint">The address is used only for read-only checks. GrindGuard never asks for a wallet connection.</p>
+        <button class="btn-primary" id="runBtn" type="submit">Run verification</button>
+      </form>
+      <div class="chips" aria-label="Try a real program">
+        <button class="chip" type="button" data-example="https://app.orbinum.network">Orbinum</button>
+        <button class="chip" type="button" data-example="https://flop.network">Flop</button>
+        <button class="chip" type="button" data-example="https://this-host-does-not-exist-xyz123.com">Dead host</button>
+      </div>
+    </section>
+
+    <section class="card span-5" aria-label="Verdict" id="verdictCard">
+      <h2>Verdict</h2>
+      <div id="verdictBody">
+        <p class="empty">No verification has run yet. Paste a URL and press Run verification.</p>
+      </div>
+    </section>
+
+    <section class="card span-12" aria-label="Checks" id="checksCard">
+      <h2>Ten checks</h2>
+      <p>Each check shows its status, the evidence it found, and the source it read. Statuses: pass, warn, fail, unknown.</p>
+      <div class="grid" id="checksGrid">
+        <p class="empty span-12">Results appear here after a verification runs.</p>
+      </div>
+    </section>
+
+    <section class="card span-6" aria-label="How scoring works">
+      <h2>How scoring works</h2>
+      <p>Each check carries a weight. Site reachability and contract checks weigh most at 15 points each. Team, token, costs, marketing, domain age, and social weigh 10 each. Faucet and payout weigh 5 each.</p>
+      <p>A fail on any check means SKIP. An unknown result on the site, contract, or token check means CAUTION. A score below 70 means CAUTION. Everything else is GRIND.</p>
+    </section>
+
+    <section class="card span-6" aria-label="Honest limits">
+      <h2>Honest limits</h2>
+      <p>Sites behind bot protection cannot be read, and that check reports unknown instead of guessing. Pages that render content with JavaScript may show fewer links than a browser sees, because GrindGuard reads the static HTML. No code can prove what a team intends to do. A verdict is a starting point for your own check, not a promise. Verdicts stay in this session and are never published.</p>
+      <p>AI synthesis runs only when a Groq API key is configured on the server. Without a key, the verdict is purely rule based and the page says so. When synthesis is on, the check results and the program URL are sent to Groq.</p>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <p>GrindGuard. MIT licensed. Built for SLAY HACKS 2026.</p>
+    <p>Checks read public sources only: the program site, public EVM RPC endpoints, DexScreener, RDAP and crt.sh, GitHub public search, and block explorer source pages.</p>
+  </footer>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>

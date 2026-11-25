@@ -1,0 +1,1 @@
+{"description":"AI verdict engine for crypto airdrop and testnet programs. Ten live checks, evidence, and a GRIND, CAUTION, or SKIP verdict.","engines":{"node":">=22"},"license":"MIT","name":"grindguard","scripts":{"start":"node server.mjs","test":"node --test test/verify.test.mjs"},"type":"module","version":"1.0.0"}
