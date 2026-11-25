@@ -116,3 +116,10 @@ test("live: USDT on BSC has contract code and a trading pair", { skip: !LIVE }, 
   assert.ok(contract.status === "pass" || contract.status === "warn", `contract check: ${contract.status}`);
   assert.equal(token.status, "pass");
 });
+
+test("live: domain age resolves for a .network program (RDAP or crt.sh fallback)", { skip: !LIVE }, async () => {
+  const { runVerification } = await import("../lib/verify.mjs");
+  const report = await runVerification({ url: "https://flop.network/", contractAddress: "", chain: "bsc" });
+  const domainAge = report.checks.find((c) => c.id === 7);
+  assert.equal(domainAge.status, "pass", `domain age check: ${domainAge.evidence}`);
+});
